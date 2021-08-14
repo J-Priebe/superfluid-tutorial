@@ -18,6 +18,7 @@ function publishContract(contractName, networkName) {
         graphConfig = fs.readFileSync(graphConfigPath).toString();
       } else {
         graphConfig = "{}";
+        console.log("No graph config found.");
       }
     } catch (e) {
       console.log(e);
