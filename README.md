@@ -42,6 +42,9 @@ yarn deploy
 
 🔬 Write tests in `packages/hardhat/test`
 
+## Linting
+```cd packages/react-app && yarn run lint --fix``
+
 ## Shipping
 - Deploy contracts to another network by editing `packages/hardhat/hardhat.config.js` and then running `yarn run deploy`
 - Create a deployer account with `yarn run generate`

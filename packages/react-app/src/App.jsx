@@ -1,7 +1,7 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
 
-import { Alert, Button, Menu, } from "antd";
+import { Alert, Button, Menu } from "antd";
 import "antd/dist/antd.css";
 import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
@@ -10,37 +10,31 @@ import "./App.css";
 import { Account, Header } from "./components";
 import { INFURA_ID, NETWORK, NETWORKS } from "./constants";
 import { Transactor } from "./helpers";
-import {
-  useBalance,
-  useContractLoader,
-  useExchangePrice,
-  useGasPrice,
-} from "./hooks";
+import { useBalance, useContractLoader, useExchangePrice, useGasPrice } from "./hooks";
 import { ExampleUI } from "./views";
 
 const { ethers } = require("ethers");
 
-
 const DEBUG = false;
 // Where you're deployed, e.g., localhost, MATIC, Mumbai testnet
-const targetNetwork = NETWORKS.localhost; 
+const targetNetwork = NETWORKS.localhost;
 // 🔭 block explorer URL
 const blockExplorer = targetNetwork.blockExplorer;
 
 // PROVIDERS
 // Static provider for reading, when user has not connected their wallet
 const readOnlyProvider = new ethers.providers.StaticJsonRpcProvider(targetNetwork.rpcUrl);
-// Dedicated mainnet Infura provider; 
-// handy for looking up exchange prices, ENS, 
+// Dedicated mainnet Infura provider;
+// handy for looking up exchange prices, ENS,
 // and other live data that you want in all environments, including dev.
 const mainnetProvider = new ethers.providers.StaticJsonRpcProvider("https://mainnet.infura.io/v3/" + INFURA_ID);
 
 function App(props) {
   // Injected provider for writing - connected via web3 modal
   const [injectedProvider, setInjectedProvider] = useState();
-  
+
   const address = useUserAddress(injectedProvider);
-  
+
   /* 💵 This hook will get the price of ETH from 🦄 Uniswap: */
   const price = useExchangePrice(targetNetwork, mainnetProvider);
 
@@ -60,23 +54,14 @@ function App(props) {
 
   // 🧫 DEBUG 👨🏻‍🔬
   useEffect(() => {
-    if (
-      DEBUG &&
-      address &&
-      selectedChainId &&
-      yourLocalBalance
-    ) {
+    if (DEBUG && address && selectedChainId && yourLocalBalance) {
       console.log("_____________________________________ 🏗 scaffold-eth _____________________________________");
       console.log("🏠 localChainId", localChainId);
       console.log("👩‍💼 selected address:", address);
       console.log("🕵🏻‍♂️ selectedChainId:", selectedChainId);
       console.log("💵 yourLocalBalance", yourLocalBalance ? ethers.utils.formatEther(yourLocalBalance) : "...");
     }
-  }, [
-    address,
-    selectedChainId,
-    yourLocalBalance,
-  ]);
+  }, [address, selectedChainId, yourLocalBalance]);
 
   let networkDisplay = "";
   if (localChainId && selectedChainId && localChainId !== selectedChainId) {
@@ -147,7 +132,7 @@ function App(props) {
 
   const logoutOfWeb3Modal = async () => {
     await web3Modal.clearCachedProvider();
-    if(injectedProvider?.provider && typeof injectedProvider.provider.disconnect == "function"){
+    if (injectedProvider?.provider && typeof injectedProvider.provider.disconnect == "function") {
       await injectedProvider.provider.disconnect();
     }
     setTimeout(() => {
@@ -208,15 +193,15 @@ function App(props) {
         <Switch>
           <Route exact path="/">
             <ExampleUI
-                address={address}
-                mainnetProvider={mainnetProvider}
-                localProvider={readOnlyProvider}
-                yourLocalBalance={yourLocalBalance}
-                price={price}
-                tx={transactor}
-                writeContracts={writeContracts}
-                readContracts={readContracts}
-              />
+              address={address}
+              mainnetProvider={mainnetProvider}
+              localProvider={readOnlyProvider}
+              yourLocalBalance={yourLocalBalance}
+              price={price}
+              tx={transactor}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -234,7 +219,6 @@ function App(props) {
           blockExplorer={blockExplorer}
         />
       </div>
-
     </div>
   );
 }
@@ -248,7 +232,7 @@ const web3Modal = new Web3Modal({
   cacheProvider: true, // optional
   providerOptions: {
     walletconnect: {
-      package: WalletConnectProvider, 
+      package: WalletConnectProvider,
       options: {
         infuraId: INFURA_ID,
       },
