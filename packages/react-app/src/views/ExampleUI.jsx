@@ -13,14 +13,12 @@ export default function ExampleUI({
   readContracts,
   writeContracts,
 }) {
-
   return (
     <div>
       <div style={{ border: "1px solid #cccccc", padding: 16, width: 400, margin: "auto", marginTop: 64 }}>
         <h2>Example UI:</h2>
         <Divider />
         <div style={{ margin: 8 }}>
-
           <Button
             style={{ marginTop: 8 }}
             onClick={() => {
@@ -59,11 +57,7 @@ export default function ExampleUI({
         <Balance address={address} provider={localProvider} price={price} />
         <Divider />
         Your Contract Address:
-        <Address
-          address={readContracts?.YourContract?.address}
-          ensProvider={mainnetProvider}
-          fontSize={16}
-        />
+        <Address address={readContracts?.YourContract?.address} ensProvider={mainnetProvider} fontSize={16} />
       </div>
 
       {/*
