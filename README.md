@@ -42,7 +42,7 @@ yarn deploy
 
 🔬 Write tests in `packages/hardhat/test`
 
-## Linting
+## Linting & Prettier
 ```cd packages/react-app && yarn run lint --fix``
 
 ## Shipping
