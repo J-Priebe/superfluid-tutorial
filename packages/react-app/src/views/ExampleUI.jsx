@@ -1,6 +1,5 @@
-import { SyncOutlined } from "@ant-design/icons";
 import { utils } from "ethers";
-import { Button, Card, DatePicker, Divider, Input, List, Progress, Slider, Spin, Switch } from "antd";
+import { Button, Divider } from "antd";
 import React, { useState } from "react";
 import { Address, Balance } from "../components";
 
