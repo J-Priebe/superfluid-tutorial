@@ -1,11 +1,11 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useUserAddress } from "eth-hooks";
 
-import { Alert, Button, Col, Menu, Row } from "antd";
+import { Alert, Button, Menu, } from "antd";
 import "antd/dist/antd.css";
 import React, { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
-import Web3Modal, { injected } from "web3modal";
+import Web3Modal from "web3modal";
 import "./App.css";
 import { Account, Header } from "./components";
 import { INFURA_ID, NETWORK, NETWORKS } from "./constants";
@@ -248,7 +248,7 @@ const web3Modal = new Web3Modal({
   cacheProvider: true, // optional
   providerOptions: {
     walletconnect: {
-      package: WalletConnectProvider, // required
+      package: WalletConnectProvider, 
       options: {
         infuraId: INFURA_ID,
       },
