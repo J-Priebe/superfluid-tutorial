@@ -1,11 +1,7 @@
-# 🏗 Scaffold-ETH
-
-> everything you need to build on Ethereum! 🚀
-
-🧪 Quickly experiment with Solidity using a frontend that adapts to your smart contract:
-
-![image](https://user-images.githubusercontent.com/2653167/124158108-c14ca380-da56-11eb-967e-69cde37ca8eb.png)
-
+# Scaffold-ETH Barebones
+A fork of [scaffold-eth](https://github.com/austintgriffith/scaffold-eth) that is meant to be a more a la carte
+bootstrapping template, for use once you have some familiarity with web3 and understand your requirements. Removes
+the more exploratory and learning-centric elements of scaffold-eth and uses three providers: a static read-only provider for users without a connected wallet, a mainnet provider for fetching exchange prices, ENS, etc, and an injected web3 provider.
 
 # 🏄‍♂️ Quick Start
 
@@ -43,6 +39,7 @@ yarn deploy
 
 ## Testing
 ```yarn test```
+
 🔬 Write tests in `packages/hardhat/test`
 
 ## Shipping

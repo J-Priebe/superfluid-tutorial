@@ -36,7 +36,7 @@ export default function useContractReader(contracts, contractName, functionName,
 
   useEffect(() => {
     if (typeof onChange === "function") {
-      setTimeout(onChange.bind(this, value), 1);
+      setTimeout(onChange.bind(this, value), 1000);
     }
   }, [value, onChange]);
 
