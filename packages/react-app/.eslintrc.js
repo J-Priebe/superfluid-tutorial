@@ -2,18 +2,20 @@ module.exports = {
   env: {
     browser: true,
   },
-  // airbnb disabled after upgrade to cra 4 due to errors in our code
-  extends: [/*"airbnb"*/ "plugin:prettier/recommended"],
   parser: "babel-eslint",
-  plugins: ["babel"],
+  // airbnb disabled after upgrade to cra 4 due to errors in our code
+  extends: [/*"airbnb" "plugin:prettier/recommended" */],
+  plugins: [
+    /*"babel"*/
+  ],
   rules: {
-    "prettier/prettier": "warn",
-    "prettier/prettier": [
-      "warn",
-      {
-        endOfLine: "auto",
-      },
-    ],
+    // "prettier/prettier": "warn",
+    // "prettier/prettier": [
+    //   "warn",
+    //   {
+    //     endOfLine: "auto",
+    //   },
+    // ],
     "import/prefer-default-export": "off",
     "prefer-destructuring": "off",
     "prefer-template": "off",

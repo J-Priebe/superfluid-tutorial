@@ -15,9 +15,12 @@ import { ExampleUI } from "./views";
 
 const { ethers } = require("ethers");
 
+const SuperfluidSDK = require("@superfluid-finance/js-sdk");
+// const { Web3Provider } = require("@ethersproject/providers");
+
 const DEBUG = false;
 // Where you're deployed, e.g., localhost, MATIC, Mumbai testnet
-const targetNetwork = NETWORKS.localhost;
+const targetNetwork = NETWORKS.ropsten;
 // 🔭 block explorer URL
 const blockExplorer = targetNetwork.blockExplorer;
 
@@ -32,6 +35,8 @@ const mainnetProvider = new ethers.providers.StaticJsonRpcProvider("https://main
 function App(props) {
   // Injected provider for writing - connected via web3 modal
   const [injectedProvider, setInjectedProvider] = useState();
+
+  const [superfluid, setSuperfluid] = useState();
 
   const address = useUserAddress(injectedProvider);
 
@@ -140,6 +145,9 @@ function App(props) {
     }, 1);
   };
 
+
+  // this function must be maintained between renders 
+  // because it is a dependency to other useEffect hooks
   const loadWeb3Modal = useCallback(async () => {
     const provider = await web3Modal.connect();
     setInjectedProvider(new ethers.providers.Web3Provider(provider));
@@ -172,6 +180,27 @@ function App(props) {
     setRoute(window.location.pathname);
   }, [setRoute]);
 
+  // set our superfluid instance once provider is injected..
+  useEffect(() => {
+    console.log('injected provider?', injectedProvider);
+    
+    if (injectedProvider && !superfluid) {
+      const sf = new SuperfluidSDK.Framework({
+        ethers: injectedProvider
+      });
+      /* await */ sf.initialize();
+      setSuperfluid(sf);
+    }
+
+  }, [injectedProvider]);
+
+
+  useEffect(() => {
+    console.log('superfluid', superfluid);
+
+  }, [superfluid]);
+
+
   return (
     <div className="App">
       <Header />
@@ -201,6 +230,7 @@ function App(props) {
               tx={transactor}
               writeContracts={writeContracts}
               readContracts={readContracts}
+              superfluid={superfluid}
             />
           </Route>
         </Switch>

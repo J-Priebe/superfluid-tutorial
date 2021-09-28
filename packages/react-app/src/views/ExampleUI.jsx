@@ -12,6 +12,7 @@ export default function ExampleUI({
   tx,
   readContracts,
   writeContracts,
+  superfluid,
 }) {
   return (
     <div>
@@ -19,6 +20,7 @@ export default function ExampleUI({
         <h2>Example UI:</h2>
         <Divider />
         <div style={{ margin: 8 }}>
+          Superfluid:{superfluid?.version}
           <Button
             style={{ marginTop: 8 }}
             onClick={() => {
