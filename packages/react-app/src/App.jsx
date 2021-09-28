@@ -181,25 +181,19 @@ function App(props) {
   }, [setRoute]);
 
   // set our superfluid instance once provider is injected..
-  useEffect(() => {
-    console.log('injected provider?', injectedProvider);
+  useEffect(async () => {
     
     if (injectedProvider && !superfluid) {
       const sf = new SuperfluidSDK.Framework({
         ethers: injectedProvider
       });
-      /* await */ sf.initialize();
+      // Can't set our state until we've initialized,
+      // otherwise `undefined` errors will crop up
+      await sf.initialize();
       setSuperfluid(sf);
     }
 
   }, [injectedProvider]);
-
-
-  useEffect(() => {
-    console.log('superfluid', superfluid);
-
-  }, [superfluid]);
-
 
   return (
     <div className="App">
